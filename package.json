@@ -1,0 +1,29 @@
+{
+  "name": "to-do",
+  "version": "1.0.0",
+  "description": "a to do list app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "next",
+    "start:build": "next build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmas28/toDo-ui.git"
+  },
+  "author": "Cosmas Billa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cosmas28/toDo-ui/issues"
+  },
+  "homepage": "https://github.com/cosmas28/toDo-ui#readme",
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
+    "next": "^9.0.6",
+    "node-sass": "^4.12.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
+}
