@@ -1,9 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { TiWeatherPartlySunny } from 'react-icons/ti';
 
 const Nav = styled.div`
+  background-color: #FFFFFF;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -23,6 +25,8 @@ const Nav = styled.div`
 const Logo = styled.a`
   text-decoration: none;
   padding: 10px;
+  cursor: pointer;
+
   @media screen and (min-width: 940px){
     order: 0;
     flex-basis: 60%;
@@ -60,7 +64,6 @@ const MenuLink = styled.a`
 
 const MenuIcon = styled.button`
   order: 1;
-  padding: 10px;
 
   &:active {
     text-decoration: none;
@@ -93,14 +96,20 @@ class NavBar extends React.Component {
 
     return (
       <Nav>
-        <Logo><TiWeatherPartlySunny size={50} color='#3359DB' /></Logo>
-        <MenuLink
-          onClick={this.handleMenuClick('To-Do')}
-          active={activeMenu === 'To-Do' ? true : false}
-          showMobileMenu={showMobileMenu}
-        >
-          To-Do
-        </MenuLink>
+        <Link href='/'>
+          <Logo>
+            <TiWeatherPartlySunny size={50} color='#3359DB' />
+          </Logo>
+        </Link>
+        <Link href='/todo'>
+          <MenuLink
+            onClick={this.handleMenuClick('To-Do')}
+            active={activeMenu === 'To-Do' ? true : false}
+            showMobileMenu={showMobileMenu}
+          >
+            To-Do
+          </MenuLink>
+        </Link>
         <MenuLink
           onClick={this.handleMenuClick('Goals')}
           active={activeMenu === 'Goals' ? true : false}
