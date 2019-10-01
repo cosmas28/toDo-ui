@@ -4,8 +4,6 @@ import { TiArrowBack } from 'react-icons/ti';
 import { IoMdMore, IoIosAddCircle } from 'react-icons/io';
 import { FaFilter } from 'react-icons/fa';
 
-import MenuButton from '../components/MenuButton';
-
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -53,7 +51,7 @@ const RightSide = styled.div`
 `;
 
 const Title = styled.h1`
-  font-weight: 600;
+  font-weight: 200;
   text-align: center;
 
   @media screen and (max-width: 500px) {
