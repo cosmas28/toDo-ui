@@ -2,17 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 
-import NavBar from '../components/NavBar';
+import MainLayout from '../components/MainLayout';
 import MainSection from '../components/MainSection';
-
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    width: 100%;
-    margin: 0;
-    font-family: "Gill Sans", sans-serif;
-  }
-`;
 
 const MainPage = styled.div`
   display: flex;
@@ -20,13 +11,11 @@ const MainPage = styled.div`
 `;
 
 const App = () => (
-  <>
-    <GlobalStyle />
+  <MainLayout>
     <MainPage>
-      <NavBar />
       <MainSection />
     </MainPage>
-  </>
+  </MainLayout>
 )
 
 export default App;
