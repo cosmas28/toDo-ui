@@ -5,22 +5,29 @@ import MainLayout from '../components/MainLayout';
 import Header, { renderAddIcon, renderFilterIcon } from '../components/Header';
 import MenuButton from '../components/MenuButton';
 import Modal from '../components/Modal';
+import ToDoCard from '../components/ToDoCard';
 
 const Container = styled.div`
   width: 100%;
+  margin: 0 5% 0 5%;
 
   @media screen and (min-width: 1290px) {
     padding: 0 10% 0 10%;
   }
+
+  @media screen and (min-width: 768px) {
+    margin: 0 1% 0 3%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    margin: 0 1% 0 5%;
+  }
 `;
 
 const ToDoContainer = styled.div`
-  background-color: #FFFFFF;
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
-`;
-
-const ParagraphText = styled.p`
-  font-size: 1rem;
 `;
 
 export const renderTodoMenu = (display) => (
@@ -62,10 +69,31 @@ export class ToDo extends React.Component {
           content={renderTodoMenu(true)}
         />
         <ToDoContainer>
-          <ParagraphText>
-            As seen above, pseudo-selectors and pseudo-elements are well handled in Styled Components and pretty
-            much everything that can be done in traditional CSS can be done in Styled Components.
-          </ParagraphText>
+          <ToDoCard
+            title="Attend Stand-ups"
+            goal="Hotdesk initiative"
+            tag="ProactiveCommunication"
+          />
+          <ToDoCard
+            title="Raise a WIP PR"
+            goal="Hotdesk initiative"
+            tag="StakeholderManagement"
+          />
+          <ToDoCard
+            title="Sync with TTL"
+            goal="Hotdesk initiative"
+            tag="PairProgramming"
+          />
+          <ToDoCard
+            title="Continue RegExp learning"
+            goal="Master JavaScript"
+            tag="frontEndMastering"
+          />
+          <ToDoCard
+            title="SEO optimization"
+            goal="Master web/browser"
+            tag="frontEndMastering"
+          />
         </ToDoContainer>
       </Container>
       <Modal
