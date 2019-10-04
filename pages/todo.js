@@ -67,6 +67,7 @@ export class ToDo extends React.Component {
           title='My To-Do'
           handleMoreButton={this.toggleMoreButton}
           content={renderTodoMenu(true)}
+          hideBackButton={true}
         />
         <ToDoContainer>
           <ToDoCard

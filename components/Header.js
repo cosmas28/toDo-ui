@@ -60,6 +60,7 @@ const Title = styled.h1`
 `;
 
 const Button = styled.button`
+  display: ${props => props.isHidden && 'none'};
   background: none;
   margin-right: ${props => props.backButton && '2em'};
   border: none;
@@ -85,12 +86,12 @@ export const renderFilterIcon = (iconSize) => (
 );
 
 const Header = props => {
-  const { title, handleMoreButton, content } = props;
+  const { title, handleMoreButton, content, hideBackButton } = props;
 
   return (
     <Container>
       <LeftSide>
-        <Button backButton>
+        <Button backButton isHidden={hideBackButton}>
           <TiArrowBack size={50} color='#3359DB' />
         </Button>
         <Title>{title}</Title>

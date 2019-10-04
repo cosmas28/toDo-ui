@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -74,73 +74,60 @@ const MenuIcon = styled.button`
   }
 `;
 
-class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMobileMenu: false,
-      activeMenu: 'To-Do',
-    }
-  }
+const NavBar = () => {
+  const [showMobileMenu, showMenu] = useState(false);
+  const [activeMenu, setLink] = useState('To-Do');
 
-  toggleMobileMenu = () => this.setState({
-    showMobileMenu: !this.state.showMobileMenu,
-  })
+  const toggleMobileMenu = () => showMenu(!showMobileMenu);
 
-  handleMenuClick = (menuLabel) => () => this.setState({
-    activeMenu: menuLabel,
-  })
-
-  render () {
-    const { showMobileMenu, activeMenu } = this.state;
-
-    return (
-      <Nav>
-        <Link href='/'>
-          <Logo>
-            <TiWeatherPartlySunny size={50} color='#3359DB' />
-          </Logo>
-        </Link>
-        <Link href='/todo'>
-          <MenuLink
-            onClick={this.handleMenuClick('To-Do')}
-            active={activeMenu === 'To-Do' ? true : false}
-            showMobileMenu={showMobileMenu}
-          >
-            To-Do
-          </MenuLink>
-        </Link>
+  const handleLinkClick = (menuLabel) => () => setLink(menuLabel);
+  
+  return (
+    <Nav>
+      <Link href='/'>
+        <Logo>
+          <TiWeatherPartlySunny size={50} color='#3359DB' />
+        </Logo>
+      </Link>
+      <Link href='/todo'>
         <MenuLink
-          onClick={this.handleMenuClick('Goals')}
-          active={activeMenu === 'Goals' ? true : false}
+          onClick={handleLinkClick('To-Do')}
+          active={activeMenu === 'To-Do' ? true : false}
           showMobileMenu={showMobileMenu}
         >
-          Goals
+          To-Do
         </MenuLink>
-        <MenuLink
-          onClick={this.handleMenuClick('Notes')}
-          active={activeMenu === 'Notes' ? true : false}
-          showMobileMenu={showMobileMenu}
-        >
-          Notes
-        </MenuLink>
-        <MenuLink
-          onClick={this.handleMenuClick('Routines')}
-          active={activeMenu === 'Routines' ? true : false}
-          showMobileMenu={showMobileMenu}
-        >
-          Routines
-        </MenuLink>
-        <MenuIcon onClick={this.toggleMobileMenu}>
-          {
-            !showMobileMenu
-              ? <FaBars size={50} color='#3359DB'/>
-              : <FaTimes size={50} color='#3359DB' />
-          }
-        </MenuIcon>
-      </Nav>
-    )
-  }
+      </Link>
+      <MenuLink
+        onClick={handleLinkClick('Goals')}
+        active={activeMenu === 'Goals' ? true : false}
+        showMobileMenu={showMobileMenu}
+      >
+        Goals
+      </MenuLink>
+      <MenuLink
+        onClick={handleLinkClick('Notes')}
+        active={activeMenu === 'Notes' ? true : false}
+        showMobileMenu={showMobileMenu}
+      >
+        Notes
+      </MenuLink>
+      <MenuLink
+        onClick={handleLinkClick('Routines')}
+        active={activeMenu === 'Routines' ? true : false}
+        showMobileMenu={showMobileMenu}
+      >
+        Routines
+      </MenuLink>
+      <MenuIcon onClick={toggleMobileMenu}>
+        {
+          !showMobileMenu
+            ? <FaBars size={50} color='#3359DB'/>
+            : <FaTimes size={50} color='#3359DB' />
+        }
+      </MenuIcon>
+    </Nav>
+  );
 }
 
 export default NavBar;
