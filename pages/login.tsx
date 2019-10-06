@@ -1,4 +1,5 @@
 import React from 'react';
+import { NextPage } from 'next';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -62,10 +63,10 @@ const CheckBoxLabel = styled.div`
   }
 `;
 
-const Login = () => {
+const Login: NextPage = () => {
   const router = useRouter();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
     router.push('/todo');
   }

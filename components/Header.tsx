@@ -59,7 +59,13 @@ const Title = styled.h1`
   }
 `;
 
-const Button = styled.button`
+type ButtonProps = {
+  isHidden?: boolean;
+  backButton?: boolean;
+  moreButton?: boolean;
+}
+
+const Button = styled.button<ButtonProps>`
   display: ${props => props.isHidden && 'none'};
   background: none;
   margin-right: ${props => props.backButton && '2em'};
@@ -77,15 +83,22 @@ const Button = styled.button`
   }
 `;
 
-export const renderAddIcon = (iconSize) => (
+export const renderAddIcon = (iconSize: number) => (
   <IoIosAddCircle size={iconSize} color='#3359DB' />
 );
 
-export const renderFilterIcon = (iconSize) => (
+export const renderFilterIcon = (iconSize: number) => (
   <FaFilter size={iconSize} color='#3359DB' />
 );
 
-const Header = props => {
+type HeaderProps = {
+  title: string;
+  handleMoreButton: () => void;
+  content: JSX.Element;
+  hideBackButton: boolean;
+}
+
+const Header: React.FunctionComponent<HeaderProps> = props => {
   const { title, handleMoreButton, content, hideBackButton } = props;
 
   return (

@@ -5,7 +5,11 @@ const Container = styled.div`
   margin-bottom: 0.8rem;
 `;
 
-const InputWrap = styled.div`
+type InputWrapProps = {
+  isDisplayed: boolean;
+}
+
+const InputWrap = styled.div<InputWrapProps>`
   background-color: #F0F8FF;
   display: flex;
   flex-wrap: wrap;
@@ -15,7 +19,11 @@ const InputWrap = styled.div`
   box-shadow: inset 0 1px 4px rgba(0,0,0,.1), 0 0 0 transparent;
 `;
 
-const ErrorWrap = styled.div`
+type ErrorWrapProps = {
+  isDisplayed: boolean;
+}
+
+const ErrorWrap = styled.div<ErrorWrapProps>`
   display: ${props => props.isDisplayed ? 'block' : 'none'}
   width: 100%;
   color: #FF0000;
@@ -49,7 +57,14 @@ const Input = styled.input`
   }
 `;
 
-const InputBox = props => {
+type InputBoxProps = {
+  icon: JSX.Element;
+  inputType: string;
+  placeholder: string;
+  errorMessage?: string;
+}
+
+const InputBox: React.FunctionComponent<InputBoxProps> = props => {
   const { icon, inputType, placeholder, errorMessage } = props;
   const isDisplayed = errorMessage ? true : false;
 

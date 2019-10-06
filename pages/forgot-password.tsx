@@ -1,4 +1,5 @@
 import React from 'react';
+import { NextPage } from 'next';
 import styled from 'styled-components';
 import Link from 'next/link';
 
@@ -31,9 +32,11 @@ const LoginLink = styled.a`
   cursor: pointer;
 `;
 
-const ForgotPassword = () => {
+const ForgotPassword: NextPage = () => {
   return (
-    <AuthPageLayout>
+    <AuthPageLayout
+    displayHeader={false}
+    >
       <Header>
         <Title>Forgot Password</Title>
         <Message>

@@ -33,14 +33,22 @@ const AuthCard = styled.div`
   box-shadow: 0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.1);
 `;
 
-const Header = styled.div`
+type HeaderProps = {
+  isDisplayed: boolean;
+}
+
+const Header = styled.div<HeaderProps>`
   display: ${props => props.isDisplayed ? 'flex' : 'none'};
   flex-wrap: wrap;
   width: 100%;
   border-bottom: 1px solid #BCBCBC;
 `;
 
-const Tab = styled.a`
+type TabProps = {
+  active: boolean;
+}
+
+const Tab = styled.a<TabProps>`
   background-color: none;
   flex: 1;
   width: 50%;
@@ -58,7 +66,12 @@ const TabContent = styled.div`
   padding: 5%;
 `;
 
-const AuthPageLayout = props => {
+type AuthPageLayoutProps = {
+  displayHeader: boolean;
+  activeTab?: string;
+}
+
+const AuthPageLayout: React.FunctionComponent<AuthPageLayoutProps> = props => {
   const { displayHeader, children, activeTab } = props;
   
   return (
