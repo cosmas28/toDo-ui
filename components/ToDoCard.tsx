@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Button from '../components/Button';
-import { deleteIcon, editIcon, dropdownIcon } from '../components/Icons';
+import Button from './Button';
+import { deleteIcon, editIcon, dropdownIcon } from './Icons';
 
 const Container = styled.div`
   display: inline-block;
@@ -42,7 +42,11 @@ const Header = styled.h3`
   font-weight: 350;
 `;
 
-const Paragraph = styled.p`
+type ParagraphProps = {
+  isTag?: Boolean;
+}
+
+const Paragraph = styled.p<ParagraphProps>`
   font-size: ${props => props.isTag ? '1rem' : '1.2rem'};
   font-weight: 300;
   color: ${props => props.isTag && '#A9A9A9'};
@@ -57,7 +61,13 @@ const Footer = styled.div`
   width: 100%;
 `;
 
-const ToDoCard = props => {
+type ToDoCardProps = {
+  title: string;
+  goal: string;
+  tag: string;
+}
+
+const ToDoCard: React.FunctionComponent<ToDoCardProps> = props => {
   const {title, goal, tag } = props;
 
   return (

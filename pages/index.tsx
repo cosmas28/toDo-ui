@@ -1,4 +1,5 @@
-import React from 'react';
+import * as React from 'react';
+import { NextPage } from 'next';
 import styled from 'styled-components';
 
 import AuthPageLayout from '../components/AuthPageLayout'
@@ -7,12 +8,20 @@ import { userIcon, emailIcon, passwordIcon } from '../components/Icons';
 
 export const Form = styled.form``;
 
-export const FormItem = styled.div`
+type FormItemProps = {
+  isForgot?: boolean;
+}
+
+export const FormItem = styled.div<FormItemProps>`
   margin-bottom: 0.8rem;
   text-align: ${props => props.isForgot && 'center'};
 `;
 
-export const Button = styled.button`
+type ButtonProps = {
+  isForgot?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
   background: #3359DB;
   width: ${props => props.isForgot && '100%'};
   height: 40px;
@@ -29,7 +38,7 @@ export const Button = styled.button`
   }
 `;
 
-const App = () => {
+const App: NextPage = () => {
   return (
     <AuthPageLayout
       displayHeader={true}

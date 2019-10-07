@@ -33,7 +33,12 @@ const Logo = styled.a`
   }
 `;
 
-const MenuLink = styled.a`
+type MenuLinkProps = {
+  showMobileMenu: boolean;
+  active: boolean;
+}
+
+const MenuLink = styled.a<MenuLinkProps>`
   display: ${props => (props.showMobileMenu ? 'block' : 'none')};
   order: 2;
   padding: 10px;
@@ -74,7 +79,7 @@ const MenuIcon = styled.button`
   }
 `;
 
-const NavBar = () => {
+const NavBar: React.FunctionComponent = () => {
   const [showMobileMenu, showMenu] = useState(false);
   const [activeMenu, setLink] = useState('To-Do');
 

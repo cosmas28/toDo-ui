@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
-const Container = styled.div`
+type ContainerProps = {
+  displayModal: boolean;
+}
+
+const Container = styled.div<ContainerProps>`
   display: ${props => props.displayModal ? 'block' : 'none'};
   position: fixed;
   z-index: 1;
@@ -64,7 +68,15 @@ const Button = styled.button`
   }
 `;
 
-const Modal = ({ header, body, footer, showModal, handleCancelButton }) => (
+type ModalProps = {
+  header?: string;
+  body: JSX.Element;
+  footer?: JSX.Element;
+  showModal: boolean;
+  handleCancelButton: () => void;
+}
+
+const Modal: React.FunctionComponent<ModalProps> = ({ header, body, footer, showModal, handleCancelButton }) => (
   <Container displayModal={showModal}>
     <Content>
       <Header>

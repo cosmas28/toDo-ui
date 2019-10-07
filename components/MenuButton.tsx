@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+type ContainerProps = {
+  isDesktop: boolean;
+}
+
+const Container = styled.div<ContainerProps>`
   display: flex;
   justify-content: space between;
   width: ${props => props.isDesktop ? '48%' : '100%'};
@@ -20,7 +24,11 @@ const Container = styled.div`
   }
 `;
 
-const Label = styled.h3`
+type LabelProps = {
+  isDesktop?: boolean;
+}
+
+const Label = styled.h3<LabelProps>`
   font-size: ${props => props.isDesktop ? '1.35rem' : '1.6rem'};
   text-align: center;
   color: #3359DB;
@@ -32,7 +40,13 @@ const Icon = styled.i`
   padding: 26px 10px 0 0;
 `;
 
-const MenuButton = props => {
+type MenuButtonProps = {
+  isDesktop: boolean;
+  iconContent: JSX.Element;
+  buttonLabel: string;
+}
+
+const MenuButton: React.FunctionComponent<MenuButtonProps> = props => {
   const { isDesktop, iconContent, buttonLabel } = props;
 
   return (

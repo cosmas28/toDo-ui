@@ -22,13 +22,23 @@ const Icon = styled.i`
   padding: 26px 10px 0 0;
 `;
 
-const Label = styled.h5`
+type LabelProps = {
+  isDelete?: boolean;
+}
+
+const Label = styled.h5<LabelProps>`
   font-size: 0.962rem;
   color: ${props => props.isDelete ? '#FF0000' : '#3359DB'};
   font-weight: 600;
 `;
 
-const Button = props => {
+type ButtonProps = {
+  label: string;
+  icon: JSX.Element;
+  type?: string;
+}
+
+const Button: React.FunctionComponent<ButtonProps> = props => {
   const { label, icon, type } = props;
 
   return (
@@ -36,7 +46,7 @@ const Button = props => {
       <Icon>
         {icon}
       </Icon>
-      <Label isDelete={type}>
+      <Label isDelete={type == 'isDelete' ? true : false}>
         {label}
       </Label>
     </Container>
