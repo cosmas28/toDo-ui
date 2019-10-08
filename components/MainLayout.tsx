@@ -13,6 +13,6 @@ const MainLayout: React.FunctionComponent = props => (
     <NavBar />
     {props.children}
   </Container>
-)
+);
 
 export default MainLayout;

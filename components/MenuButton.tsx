@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 type ContainerProps = {
   isDesktop: boolean;
-}
+};
 
 const Container = styled.div<ContainerProps>`
   display: flex;
   justify-content: space between;
-  width: ${props => props.isDesktop ? '48%' : '100%'};
-  text-align: ${props => props.isDesktop ? 'center' : 'left'};
-  
+  width: ${(props): string => (props.isDesktop ? '48%' : '100%')};
+  text-align: ${(props): string => (props.isDesktop ? 'center' : 'left')};
+
   @media screen and (min-width: 768px) {
     margin-left: 10px;
     padding: 1% 0 1% 8%;
@@ -19,19 +19,19 @@ const Container = styled.div<ContainerProps>`
   }
 
   @media screen and (max-width: 500px) {
-    display: ${props => props.isDesktop && 'none'};
-    border-bottom: 1px solid #DCDCDC;
+    display: ${(props): false | string => props.isDesktop && 'none'};
+    border-bottom: 1px solid #dcdcdc;
   }
 `;
 
 type LabelProps = {
   isDesktop?: boolean;
-}
+};
 
 const Label = styled.h3<LabelProps>`
-  font-size: ${props => props.isDesktop ? '1.35rem' : '1.6rem'};
+  font-size: ${(props): string => (props.isDesktop ? '1.35rem' : '1.6rem')};
   text-align: center;
-  color: #3359DB;
+  color: #3359db;
   font-weight: 500;
 `;
 
@@ -44,24 +44,15 @@ type MenuButtonProps = {
   isDesktop: boolean;
   iconContent: JSX.Element;
   buttonLabel: string;
-}
+};
 
 const MenuButton: React.FunctionComponent<MenuButtonProps> = props => {
   const { isDesktop, iconContent, buttonLabel } = props;
 
   return (
-    <Container
-      isDesktop={isDesktop}
-    >
-      {
-        iconContent &&
-        <Icon>
-          {iconContent}
-        </Icon>
-      }
-      <Label>
-        {buttonLabel}
-      </Label>
+    <Container isDesktop={isDesktop}>
+      {iconContent && <Icon>{iconContent}</Icon>}
+      <Label>{buttonLabel}</Label>
     </Container>
   );
 };

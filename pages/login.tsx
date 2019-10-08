@@ -28,7 +28,7 @@ const ForgotPasswordLink = styled.a`
   font-weight: 200;
   text-decoration: none;
   text-align: right;
-  color: #3359DB;
+  color: #3359db;
   cursor: pointer;
 
   @media screen and (min-width: 768px) {
@@ -45,7 +45,7 @@ const CheckBoxInput = styled.input`
   padding-left: 1.3rem;
   cursor: pointer;
 
-  @media screen and (min-width: 768px){
+  @media screen and (min-width: 768px) {
     width: 1.4rem;
     height: 1.4rem;
   }
@@ -66,35 +66,24 @@ const CheckBoxLabel = styled.div`
 const Login: NextPage = () => {
   const router = useRouter();
 
-  const handleSubmit = (e: React.MouseEvent) => {
+  const handleSubmit = (e: React.MouseEvent): void => {
     e.preventDefault();
     router.push('/todo');
-  }
+  };
 
   return (
-    <AuthPageLayout
-      displayHeader={true}
-      activeTab='Log in'
-    >
+    <AuthPageLayout displayHeader={true} activeTab="Log in">
       <Form>
-        <InputBox
-          icon={emailIcon()}
-          inputType='email'
-          placeholder='Email'
-        />
-        <InputBox
-          icon={passwordIcon()}
-          inputType='password'
-          placeholder='Your password'
-        />
+        <InputBox icon={emailIcon()} inputType="email" placeholder="Email" />
+        <InputBox icon={passwordIcon()} inputType="password" placeholder="Your password" />
         <FormSecondaryInput>
           <RememberMeWrap>
             <CheckBoxWrap>
-              <CheckBoxInput type='checkbox' />
+              <CheckBoxInput type="checkbox" />
             </CheckBoxWrap>
             <CheckBoxLabel>Remember Me</CheckBoxLabel>
           </RememberMeWrap>
-          <Link href='/forgot-password'>
+          <Link href="/forgot-password">
             <ForgotPasswordLink>Forgot Your Password?</ForgotPasswordLink>
           </Link>
         </FormSecondaryInput>
@@ -104,6 +93,6 @@ const Login: NextPage = () => {
       </Form>
     </AuthPageLayout>
   );
-}
+};
 
 export default Login;

@@ -27,7 +27,7 @@ const LogoWrap = styled.div`
 `;
 
 const AuthCard = styled.div`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   margin: auto;
   border-radius: 0.25rem;
   box-shadow: 0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.1);
@@ -35,18 +35,18 @@ const AuthCard = styled.div`
 
 type HeaderProps = {
   isDisplayed: boolean;
-}
+};
 
 const Header = styled.div<HeaderProps>`
-  display: ${props => props.isDisplayed ? 'flex' : 'none'};
+  display: ${(props): string => (props.isDisplayed ? 'flex' : 'none')};
   flex-wrap: wrap;
   width: 100%;
-  border-bottom: 1px solid #BCBCBC;
+  border-bottom: 1px solid #bcbcbc;
 `;
 
 type TabProps = {
   active: boolean;
-}
+};
 
 const Tab = styled.a<TabProps>`
   background-color: none;
@@ -56,8 +56,8 @@ const Tab = styled.a<TabProps>`
   text-align: center;
   font-size: 1.2rem;
   font-weight: 600;
-  color: ${props => props.active ? '#3359DB' : '#BCBCBC'};
-  border-bottom: ${props => (props.active && '2px solid #3359DB')};
+  color: ${(props): string => (props.active ? '#3359DB' : '#BCBCBC')};
+  border-bottom: ${(props): false | string => props.active && '2px solid #3359DB'};
   text-decoration: none;
   cursor: pointer;
 `;
@@ -69,41 +69,31 @@ const TabContent = styled.div`
 type AuthPageLayoutProps = {
   displayHeader: boolean;
   activeTab?: string;
-}
+};
 
 const AuthPageLayout: React.FunctionComponent<AuthPageLayoutProps> = props => {
   const { displayHeader, children, activeTab } = props;
-  
+
   return (
     <Container>
       <AuthWrap>
         <LogoWrap>
-          <TiWeatherPartlySunny size={50} color='#3359DB' />
+          <TiWeatherPartlySunny size={50} color="#3359DB" />
         </LogoWrap>
         <AuthCard>
           <Header isDisplayed={displayHeader}>
-            <Link href='/'>
-              <Tab
-                active={activeTab == 'Sign up' ? true : false}
-              >
-                Sign up
-              </Tab>
+            <Link href="/">
+              <Tab active={activeTab == 'Sign up' ? true : false}>Sign up</Tab>
             </Link>
-            <Link href='/login'>
-              <Tab
-                active={activeTab == 'Log in' ? true : false}
-              >
-                Log In
-              </Tab>
+            <Link href="/login">
+              <Tab active={activeTab == 'Log in' ? true : false}>Log In</Tab>
             </Link>
           </Header>
-          <TabContent>
-            {children}
-          </TabContent>
+          <TabContent>{children}</TabContent>
         </AuthCard>
       </AuthWrap>
     </Container>
   );
-}
-  
+};
+
 export default AuthPageLayout;

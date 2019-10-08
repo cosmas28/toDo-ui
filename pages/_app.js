@@ -18,7 +18,7 @@ export default class MyApp extends App {
   static async getInitialProps(appContext) {
     const appProps = await App.origGetInitialProps(appContext);
 
-    return { appProps }
+    return { appProps };
   }
 
   render() {
@@ -29,10 +29,10 @@ export default class MyApp extends App {
         <GlobalStyle />
         <Head>
           <title>To do</title>
-          <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-        <Component {...pageProps}/>
+        <Component {...pageProps} />
       </>
-    )
+    );
   }
 }
