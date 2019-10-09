@@ -31,70 +31,38 @@ const ToDoContainer = styled.div`
   width: 100%;
 `;
 
-export const renderTodoMenu = (display) => (
+export const renderTodoMenu = (display: boolean): JSX.Element => (
   <>
-    <MenuButton
-      isDesktop={display}
-      iconContent={renderAddIcon(30)}
-      buttonLabel='Add'
-    />
-    <MenuButton
-      isDesktop={display}
-      iconContent={renderFilterIcon(30)}
-      buttonLabel='Filter'
-    />
+    <MenuButton isDesktop={display} iconContent={renderAddIcon(30)} buttonLabel="Add" />
+    <MenuButton isDesktop={display} iconContent={renderFilterIcon(30)} buttonLabel="Filter" />
   </>
 );
 
 export const ToDo: NextPage = () => {
   const [showMoreMenu, showMenu] = useState(false);
 
-  const toggleMoreButton = () => showMenu(!showMoreMenu);
-  
+  const toggleMoreButton = (): void => showMenu(!showMoreMenu);
+
   return (
     <MainLayout>
-     <Container>
-       <Header
-         title='My To-Do'
-         handleMoreButton={toggleMoreButton}
-         content={renderTodoMenu(true)}
-         hideBackButton={true}
-       />
-       <ToDoContainer>
-         <ToDoCard
-           title="Attend Stand-ups"
-           goal="Hotdesk initiative"
-           tag="ProactiveCommunication"
-         />
-         <ToDoCard
-           title="Raise a WIP PR"
-           goal="Hotdesk initiative"
-           tag="StakeholderManagement"
-         />
-         <ToDoCard
-           title="Sync with TTL"
-           goal="Hotdesk initiative"
-           tag="PairProgramming"
-         />
-         <ToDoCard
-           title="Continue RegExp learning"
-           goal="Master JavaScript"
-           tag="frontEndMastering"
-         />
-         <ToDoCard
-           title="SEO optimization"
-           goal="Master web/browser"
-           tag="frontEndMastering"
-         />
-       </ToDoContainer>
-     </Container>
-     <Modal
-       showModal={showMoreMenu}
-       handleCancelButton={toggleMoreButton}
-       body={renderTodoMenu(false)}
-     />
+      <Container>
+        <Header
+          title="My To-Do"
+          handleMoreButton={toggleMoreButton}
+          content={renderTodoMenu(true)}
+          hideBackButton={true}
+        />
+        <ToDoContainer>
+          <ToDoCard title="Attend Stand-ups" goal="Hotdesk initiative" tag="ProactiveCommunication" />
+          <ToDoCard title="Raise a WIP PR" goal="Hotdesk initiative" tag="StakeholderManagement" />
+          <ToDoCard title="Sync with TTL" goal="Hotdesk initiative" tag="PairProgramming" />
+          <ToDoCard title="Continue RegExp learning" goal="Master JavaScript" tag="frontEndMastering" />
+          <ToDoCard title="SEO optimization" goal="Master web/browser" tag="frontEndMastering" />
+        </ToDoContainer>
+      </Container>
+      <Modal showModal={showMoreMenu} handleCancelButton={toggleMoreButton} body={renderTodoMenu(false)} />
     </MainLayout>
-   );
-}
+  );
+};
 
 export default ToDo;

@@ -8,7 +8,7 @@ const Container = styled.div`
   display: inline-block;
   width: 100%;
   padding: 0 0 1.15rem 0;
-  
+
   @media screen and (min-width: 768px) {
     width: 43%;
     padding: 1% 7% 2% 0;
@@ -26,7 +26,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   height: 14.12rem;
   padding: 0.31rem 0 0 1.9rem;
   border-radius: 0.25rem;
@@ -43,14 +43,14 @@ const Header = styled.h3`
 `;
 
 type ParagraphProps = {
-  isTag?: Boolean;
-}
+  isTag?: boolean;
+};
 
 const Paragraph = styled.p<ParagraphProps>`
-  font-size: ${props => props.isTag ? '1rem' : '1.2rem'};
+  font-size: ${(props): string => (props.isTag ? '1rem' : '1.2rem')};
   font-weight: 300;
-  color: ${props => props.isTag && '#A9A9A9'};
-  border: ${props => props.isTag && '0.5px solid #A9A9A9'};
+  color: ${(props): false | string | undefined => props.isTag && '#A9A9A9'};
+  border: ${(props): false | string | undefined => props.isTag && '0.5px solid #A9A9A9'};
   border-radius: 5px;
   padding: 0.2rem;
 `;
@@ -65,37 +65,23 @@ type ToDoCardProps = {
   title: string;
   goal: string;
   tag: string;
-}
+};
 
 const ToDoCard: React.FunctionComponent<ToDoCardProps> = props => {
-  const {title, goal, tag } = props;
+  const { title, goal, tag } = props;
 
   return (
     <Container>
       <Content>
-        <Header>
-          {title}
-        </Header>
-        <Paragraph>
-          {goal}
-        </Paragraph>
-        <Paragraph isTag as='i'>
+        <Header>{title}</Header>
+        <Paragraph>{goal}</Paragraph>
+        <Paragraph isTag as="i">
           #{tag}
         </Paragraph>
         <Footer>
-          <Button
-            label='Delete'
-            icon={deleteIcon()}
-            type='isDelete'
-          />
-          <Button
-            label='Edit'
-            icon={editIcon()}
-          />
-          <Button
-            label='Start'
-            icon={dropdownIcon()}
-          />
+          <Button label="Delete" icon={deleteIcon()} type="isDelete" />
+          <Button label="Edit" icon={editIcon()} />
+          <Button label="Start" icon={dropdownIcon()} />
         </Footer>
       </Content>
     </Container>

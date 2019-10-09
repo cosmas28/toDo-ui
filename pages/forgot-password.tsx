@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import AuthPageLayout from '../components/AuthPageLayout'
+import AuthPageLayout from '../components/AuthPageLayout';
 import InputBox from '../components/InputBox';
 import { emailIcon } from '../components/Icons';
 import { Form, FormItem, Button } from './index';
@@ -28,40 +28,32 @@ const LoginLink = styled.a`
   font-weight: 200;
   font-size: 1.2rem;
   text-decoration: none;
-  color: #3359DB;
+  color: #3359db;
   cursor: pointer;
 `;
 
 const ForgotPassword: NextPage = () => {
   return (
-    <AuthPageLayout
-    displayHeader={false}
-    >
+    <AuthPageLayout displayHeader={false}>
       <Header>
         <Title>Forgot Password</Title>
         <Message>
-          No Problem! Enter your email below and
-          we will send you an email with instruction to reset your password.
+          No Problem! Enter your email below and we will send you an email with instruction to reset your password.
         </Message>
       </Header>
       <Form>
-        <InputBox
-          icon={emailIcon()}
-          inputType='email'
-          placeholder='Email'
-          errorMessage=''
-        />
+        <InputBox icon={emailIcon()} inputType="email" placeholder="Email" errorMessage="" />
         <FormItem>
           <Button isForgot>Send Reset Link</Button>
         </FormItem>
         <FormItem isForgot>
-          <Link href='/login'>
+          <Link href="/login">
             <LoginLink>Back to Login</LoginLink>
           </Link>
         </FormItem>
       </Form>
     </AuthPageLayout>
   );
-}
+};
 
 export default ForgotPassword;

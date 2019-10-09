@@ -18,7 +18,7 @@ const LeftSide = styled.div`
   order: 0;
   width: 49%;
   text-align: left;
-  
+
   @media screen and (max-width: 500px) {
     flex-basis: 80%;
     width: 80%;
@@ -63,12 +63,12 @@ type ButtonProps = {
   isHidden?: boolean;
   backButton?: boolean;
   moreButton?: boolean;
-}
+};
 
 const Button = styled.button<ButtonProps>`
-  display: ${props => props.isHidden && 'none'};
+  display: ${(props): false | string | undefined => props.isHidden && 'none'};
   background: none;
-  margin-right: ${props => props.backButton && '2em'};
+  margin-right: ${(props): false | string | undefined => props.backButton && '2em'};
   border: none;
   text-decoration: none;
   cursor: pointer;
@@ -78,25 +78,21 @@ const Button = styled.button<ButtonProps>`
   }
 
   @media screen and (min-width: 500px) {
-    display: ${props => props.moreButton && 'none'};
-    margin-right: ${props => props.backButton && '5em'};
+    display: ${(props): false | string | undefined => props.moreButton && 'none'};
+    margin-right: ${(props): false | string | undefined => props.backButton && '5em'};
   }
 `;
 
-export const renderAddIcon = (iconSize: number) => (
-  <IoIosAddCircle size={iconSize} color='#3359DB' />
-);
+export const renderAddIcon = (iconSize: number): JSX.Element => <IoIosAddCircle size={iconSize} color="#3359DB" />;
 
-export const renderFilterIcon = (iconSize: number) => (
-  <FaFilter size={iconSize} color='#3359DB' />
-);
+export const renderFilterIcon = (iconSize: number): JSX.Element => <FaFilter size={iconSize} color="#3359DB" />;
 
 type HeaderProps = {
   title: string;
   handleMoreButton: () => void;
   content: JSX.Element;
   hideBackButton: boolean;
-}
+};
 
 const Header: React.FunctionComponent<HeaderProps> = props => {
   const { title, handleMoreButton, content, hideBackButton } = props;
@@ -105,13 +101,13 @@ const Header: React.FunctionComponent<HeaderProps> = props => {
     <Container>
       <LeftSide>
         <Button backButton isHidden={hideBackButton}>
-          <TiArrowBack size={50} color='#3359DB' />
+          <TiArrowBack size={50} color="#3359DB" />
         </Button>
         <Title>{title}</Title>
       </LeftSide>
       <RightSide>
         <Button moreButton onClick={handleMoreButton}>
-          <IoMdMore size={50} color='#3359DB' />
+          <IoMdMore size={50} color="#3359DB" />
         </Button>
         {content}
       </RightSide>

@@ -5,7 +5,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { TiWeatherPartlySunny } from 'react-icons/ti';
 
 const Nav = styled.div`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -27,7 +27,7 @@ const Logo = styled.a`
   padding: 10px;
   cursor: pointer;
 
-  @media screen and (min-width: 940px){
+  @media screen and (min-width: 940px) {
     order: 0;
     flex-basis: 60%;
   }
@@ -36,21 +36,21 @@ const Logo = styled.a`
 type MenuLinkProps = {
   showMobileMenu: boolean;
   active: boolean;
-}
+};
 
 const MenuLink = styled.a<MenuLinkProps>`
-  display: ${props => (props.showMobileMenu ? 'block' : 'none')};
+  display: ${(props): string => (props.showMobileMenu ? 'block' : 'none')};
   order: 2;
   padding: 10px;
-  color: ${props => (props.active ? '#3359DB' : '#BCBCBC')};
+  color: ${(props): string => (props.active ? '#3359DB' : '#BCBCBC')};
   text-decoration: none;
   text-align: left;
   cursor: pointer;
   font-size: 1rem;
 
   &:hover {
-    color: #3359DB;
-    border-bottom: 5px solid #3359DB;
+    color: #3359db;
+    border-bottom: 5px solid #3359db;
   }
 
   @media screen and (max-width: 940px) {
@@ -58,11 +58,11 @@ const MenuLink = styled.a<MenuLinkProps>`
     margin-top: 10px;
   }
 
-  @media screen and (min-width: 940px){
+  @media screen and (min-width: 940px) {
     display: block;
     order: 1;
     padding-top: 25px;
-    border-bottom: ${props => (props.active && '5px solid #3359DB')};
+    border-bottom: ${(props): string | false => props.active && '5px solid #3359DB'};
     font-size: 1.32rem;
   }
 `;
@@ -83,18 +83,18 @@ const NavBar: React.FunctionComponent = () => {
   const [showMobileMenu, showMenu] = useState(false);
   const [activeMenu, setLink] = useState('To-Do');
 
-  const toggleMobileMenu = () => showMenu(!showMobileMenu);
+  const toggleMobileMenu = (): void => showMenu(!showMobileMenu);
 
-  const handleLinkClick = (menuLabel) => () => setLink(menuLabel);
-  
+  const handleLinkClick = menuLabel => (): void => setLink(menuLabel);
+
   return (
     <Nav>
-      <Link href='/'>
+      <Link href="/">
         <Logo>
-          <TiWeatherPartlySunny size={50} color='#3359DB' />
+          <TiWeatherPartlySunny size={50} color="#3359DB" />
         </Logo>
       </Link>
-      <Link href='/todo'>
+      <Link href="/todo">
         <MenuLink
           onClick={handleLinkClick('To-Do')}
           active={activeMenu === 'To-Do' ? true : false}
@@ -125,14 +125,10 @@ const NavBar: React.FunctionComponent = () => {
         Routines
       </MenuLink>
       <MenuIcon onClick={toggleMobileMenu}>
-        {
-          !showMobileMenu
-            ? <FaBars size={50} color='#3359DB'/>
-            : <FaTimes size={50} color='#3359DB' />
-        }
+        {!showMobileMenu ? <FaBars size={50} color="#3359DB" /> : <FaTimes size={50} color="#3359DB" />}
       </MenuIcon>
     </Nav>
   );
-}
+};
 
 export default NavBar;
