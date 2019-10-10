@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/todo-ui
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run:
+          name: Update dependencies
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            # download test reporter as a static binary
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: Unit testing and upload test coverage
+          command: |
+            ./cc-test-reporter before-build
+            npm run test:unit --silent
+            /tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.unittest.json coverage/unittest/lcov.info
+      - persist_to_workspace:
+          root: tmp
+          paths:
+            - codeclimate.unittest.json
+      - run:
+          name: Upload code-coverage to code climate
+          command: |
+            /tmp/cc-test-reporter sum-coverage -p 1 -o /tmp/codeclimate.total.json tmp/codeclimate.*.json
+            /tmp/cc-test-reporter upload-coverage -i /tmp/codeclimate.total.json
+            sed -n -e 24p /tmp/codeclimate.total.json

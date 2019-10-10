@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { MdLockOutline } from 'react-icons/md';
 import { FaTrashAlt, FaRegEdit, FaCaretDown, FaRegUser, FaRegEnvelope } from 'react-icons/fa';
 

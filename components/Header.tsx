@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { TiArrowBack } from 'react-icons/ti';
 import { IoMdMore, IoIosAddCircle } from 'react-icons/io';
