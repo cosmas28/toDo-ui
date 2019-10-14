@@ -7,7 +7,7 @@
     "start:dev": "next",
     "start:build": "next build",
     "lint:fix": "eslint '*/**/*.{tsx,js}' --fix",
-    "test:unit": "jest --runInBand",
+    "test:unit": "jest --runInBand -- -u",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
