@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { TiWeatherPartlySunny } from 'react-icons/ti';
@@ -86,7 +86,7 @@ const AuthPageLayout: React.FunctionComponent<AuthPageLayoutProps> = props => {
               <Tab active={activeTab == 'Sign up' ? true : false}>Sign up</Tab>
             </Link>
             <Link href="/login">
-              <Tab active={activeTab == 'Log in' ? true : false}>Log In</Tab>
+              <Tab active={activeTab == 'Log in' ? true : false}>Log in</Tab>
             </Link>
           </Header>
           <TabContent>{children}</TabContent>

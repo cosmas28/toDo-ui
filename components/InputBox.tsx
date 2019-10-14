@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const InputWrap = styled.div<InputWrapProps>`
   flex-wrap: wrap;
   width: 100%;
   height: 45px;
-  border-bottom: ${props => props.isDisplayed && '0.1rem solid #FF0000'};
+  border-bottom: ${(props): false | string => props.isDisplayed && '0.1rem solid #FF0000'};
   box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 0 transparent;
 `;
 
@@ -24,9 +24,9 @@ type ErrorWrapProps = {
 };
 
 const ErrorWrap = styled.div<ErrorWrapProps>`
-  display: ${props => (props.isDisplayed ? 'block' : 'none')}
+  display: ${(props): string => (props.isDisplayed ? 'block' : 'none')};
   width: 100%;
-  color: #FF0000;
+  color: #ff0000;
   text-align: left;
   text-size: 1.4rem;
   font-weight: 500;

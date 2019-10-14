@@ -1,5 +1,8 @@
 ## To-Do
 
+[![CircleCI](https://circleci.com/gh/cosmas28/toDo-ui.svg?style=svg)](https://circleci.com/gh/cosmas28/toDo-ui)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e12a51b816442c95d95f/maintainability)](https://codeclimate.com/github/cosmas28/toDo-ui/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e12a51b816442c95d95f/test_coverage)](https://codeclimate.com/github/cosmas28/toDo-ui/test_coverage)
 Personal task management application.
 <br />
 <br />
