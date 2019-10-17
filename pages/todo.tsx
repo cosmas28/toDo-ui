@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { NextPage } from 'next';
 import styled from 'styled-components';
+import { inject, observer } from 'mobx-react';
 
 import MainLayout from '../components/MainLayout';
 import Header, { renderAddIcon, renderFilterIcon } from '../components/Header';
 import MenuButton from '../components/MenuButton';
 import Modal from '../components/Modal';
 import ToDoCard from '../components/ToDoCard';
+
+import RootStore from '../stores';
 
 const Container = styled.div`
   width: 100%;
@@ -39,31 +40,43 @@ export const renderTodoMenu = (display: boolean): JSX.Element => (
   </>
 );
 
-export const ToDo: NextPage = () => {
-  const [showMoreMenu, showMenu] = useState(false);
-
-  const toggleMoreButton = (): void => showMenu(!showMoreMenu);
-
-  return (
-    <MainLayout>
-      <Container>
-        <Header
-          title="My To-Do"
-          handleMoreButton={toggleMoreButton}
-          content={renderTodoMenu(true)}
-          hideBackButton={true}
-        />
-        <ToDoContainer>
-          <ToDoCard title="Attend Stand-ups" goal="Hotdesk initiative" tag="ProactiveCommunication" />
-          <ToDoCard title="Raise a WIP PR" goal="Hotdesk initiative" tag="StakeholderManagement" />
-          <ToDoCard title="Sync with TTL" goal="Hotdesk initiative" tag="PairProgramming" />
-          <ToDoCard title="Continue RegExp learning" goal="Master JavaScript" tag="frontEndMastering" />
-          <ToDoCard title="SEO optimization" goal="Master web/browser" tag="frontEndMastering" />
-        </ToDoContainer>
-      </Container>
-      <Modal showModal={showMoreMenu} handleCancelButton={toggleMoreButton} body={renderTodoMenu(false)} />
-    </MainLayout>
-  );
+type ToDoProps = {
+  store: RootStore;
 };
+
+@inject('store')
+@observer
+export class ToDo extends React.Component<ToDoProps> {
+  componentDidMount(): void {
+    this.props.store.toDoStore.getAllToDos();
+  }
+
+  toggleMoreButton = (): void => this.props.store.componentStore.setMoreMenuState();
+
+  render(): JSX.Element {
+    return (
+      <MainLayout store={this.props.store.componentStore}>
+        <Container>
+          <Header
+            title="My To-Do"
+            handleMoreButton={this.toggleMoreButton}
+            content={renderTodoMenu(true)}
+            hideBackButton={true}
+          />
+          <ToDoContainer>
+            {this.props.store.toDoStore.toDoList.map(toDo => (
+              <ToDoCard key={toDo.id} title={toDo.title} goal={toDo.linkedGoal} tag={toDo.tag} />
+            ))}
+          </ToDoContainer>
+        </Container>
+        <Modal
+          showModal={this.props.store.componentStore.showMoreMenu}
+          handleCancelButton={this.toggleMoreButton}
+          body={renderTodoMenu(false)}
+        />
+      </MainLayout>
+    );
+  }
+}
 
 export default ToDo;
