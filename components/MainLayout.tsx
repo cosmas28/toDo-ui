@@ -3,14 +3,20 @@ import styled from 'styled-components';
 
 import NavBar from './NavBar';
 
+import ComponentStore from '../stores/componentStore';
+
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-const MainLayout: React.FunctionComponent = props => (
+type MainLayoutProps = {
+  store: ComponentStore;
+};
+
+export const MainLayout: React.FunctionComponent<MainLayoutProps> = props => (
   <Container>
-    <NavBar />
+    <NavBar store={props.store} />
     {props.children}
   </Container>
 );

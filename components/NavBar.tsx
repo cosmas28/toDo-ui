@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { TiWeatherPartlySunny } from 'react-icons/ti';
+import { observer } from 'mobx-react';
+
+import ComponentStore from '../stores/componentStore';
 
 const Nav = styled.div`
   background-color: #ffffff;
@@ -80,56 +82,61 @@ const MenuIcon = styled.button`
   }
 `;
 
-const NavBar: React.FunctionComponent = () => {
-  const [showMobileMenu, showMenu] = useState(false);
-  const [activeMenu, setLink] = useState('To-Do');
+type NavBarProps = {
+  store: ComponentStore;
+};
 
-  const toggleMobileMenu = (): void => showMenu(!showMobileMenu);
+@observer
+class NavBar extends React.Component<NavBarProps> {
+  toggleMobileMenu = (): void => this.props.store.setMobileMenuState();
 
-  const handleLinkClick = menuLabel => (): void => setLink(menuLabel);
+  handleLinkClick = (menuLabel: string) => (): void => this.props.store.setActiveMenu(menuLabel);
 
-  return (
-    <Nav>
-      <Link href="/">
-        <Logo>
-          <TiWeatherPartlySunny size={50} color="#3359DB" />
-        </Logo>
-      </Link>
-      <Link href="/todo">
+  render(): JSX.Element {
+    const { showMobileMenu, activeMenu } = this.props.store;
+    return (
+      <Nav>
+        <Link href="/">
+          <Logo>
+            <TiWeatherPartlySunny size={50} color="#3359DB" />
+          </Logo>
+        </Link>
+        <Link href="/todo">
+          <MenuLink
+            onClick={this.handleLinkClick('To-Do')}
+            active={activeMenu === 'To-Do' ? true : false}
+            showMobileMenu={showMobileMenu}
+          >
+            To-Do
+          </MenuLink>
+        </Link>
         <MenuLink
-          onClick={handleLinkClick('To-Do')}
-          active={activeMenu === 'To-Do' ? true : false}
+          onClick={this.handleLinkClick('Goals')}
+          active={activeMenu === 'Goals' ? true : false}
           showMobileMenu={showMobileMenu}
         >
-          To-Do
+          Goals
         </MenuLink>
-      </Link>
-      <MenuLink
-        onClick={handleLinkClick('Goals')}
-        active={activeMenu === 'Goals' ? true : false}
-        showMobileMenu={showMobileMenu}
-      >
-        Goals
-      </MenuLink>
-      <MenuLink
-        onClick={handleLinkClick('Notes')}
-        active={activeMenu === 'Notes' ? true : false}
-        showMobileMenu={showMobileMenu}
-      >
-        Notes
-      </MenuLink>
-      <MenuLink
-        onClick={handleLinkClick('Routines')}
-        active={activeMenu === 'Routines' ? true : false}
-        showMobileMenu={showMobileMenu}
-      >
-        Routines
-      </MenuLink>
-      <MenuIcon onClick={toggleMobileMenu}>
-        {!showMobileMenu ? <FaBars size={50} color="#3359DB" /> : <FaTimes size={50} color="#3359DB" />}
-      </MenuIcon>
-    </Nav>
-  );
-};
+        <MenuLink
+          onClick={this.handleLinkClick('Notes')}
+          active={activeMenu === 'Notes' ? true : false}
+          showMobileMenu={showMobileMenu}
+        >
+          Notes
+        </MenuLink>
+        <MenuLink
+          onClick={this.handleLinkClick('Routines')}
+          active={activeMenu === 'Routines' ? true : false}
+          showMobileMenu={showMobileMenu}
+        >
+          Routines
+        </MenuLink>
+        <MenuIcon onClick={this.toggleMobileMenu}>
+          {!showMobileMenu ? <FaBars size={50} color="#3359DB" /> : <FaTimes size={50} color="#3359DB" />}
+        </MenuIcon>
+      </Nav>
+    );
+  }
+}
 
 export default NavBar;
