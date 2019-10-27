@@ -32,16 +32,24 @@ const ErrorWrap = styled.div<ErrorWrapProps>`
   font-weight: 500;
 `;
 
-const Icon = styled.i`
-  width: 22%;
+type IconProps = {
+  displayIcon: boolean;
+};
+
+const Icon = styled.i<IconProps>`
+  width: ${(props): string => (props.displayIcon ? '22%' : '0')};
   padding-top: 12px;
   text-align: center;
   border: none;
 `;
 
-const Input = styled.input`
+type InputProps = {
+  displayIcon: boolean;
+};
+
+const Input = styled.input<InputProps>`
   background-color: #f0f8ff;
-  width: 75.3%;
+  width: ${(props): string => (props.displayIcon ? '75.3%' : '99%')};
   height: 40px;
   margin: auto;
   padding-left: 2%;
@@ -58,7 +66,7 @@ const Input = styled.input`
 `;
 
 type InputBoxProps = {
-  icon: JSX.Element;
+  icon?: JSX.Element;
   inputType: string;
   placeholder: string;
   errorMessage?: string;
@@ -71,8 +79,8 @@ const InputBox: React.FunctionComponent<InputBoxProps> = props => {
   return (
     <Container>
       <InputWrap isDisplayed={isDisplayed}>
-        <Icon>{icon}</Icon>
-        <Input type={inputType} placeholder={placeholder} />
+        <Icon displayIcon={icon ? true : false}>{icon}</Icon>
+        <Input displayIcon={icon ? true : false} type={inputType} placeholder={placeholder} />
       </InputWrap>
       <ErrorWrap isDisplayed={isDisplayed}>{errorMessage}</ErrorWrap>
     </Container>

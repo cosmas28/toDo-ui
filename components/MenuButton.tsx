@@ -44,13 +44,14 @@ type MenuButtonProps = {
   isDesktop: boolean;
   iconContent: JSX.Element;
   buttonLabel: string;
+  onClickHandler: () => void;
 };
 
 const MenuButton: React.FunctionComponent<MenuButtonProps> = props => {
-  const { isDesktop, iconContent, buttonLabel } = props;
+  const { isDesktop, iconContent, buttonLabel, onClickHandler } = props;
 
   return (
-    <Container isDesktop={isDesktop}>
+    <Container onClick={onClickHandler} isDesktop={isDesktop}>
       {iconContent && <Icon>{iconContent}</Icon>}
       <Label>{buttonLabel}</Label>
     </Container>

@@ -6,7 +6,8 @@ import { useRouter } from 'next/router';
 
 import InputBox from '../components/InputBox';
 import AuthPageLayout from '../components/AuthPageLayout';
-import { Form, FormItem, Button } from './index';
+import FormButton from '../components/FormButton';
+import { Form, FormItem } from './index';
 import { emailIcon, passwordIcon } from '../components/Icons';
 
 const FormSecondaryInput = styled.div`
@@ -88,7 +89,12 @@ const Login: NextPage = () => {
           </Link>
         </FormSecondaryInput>
         <FormItem>
-          <Button onClick={handleSubmit}>Log in</Button>
+          <FormButton
+            onClickHandler={handleSubmit}
+            isFullWidth={false}
+            label="Log in"
+            isSubmit={true}
+          />
         </FormItem>
       </Form>
     </AuthPageLayout>
