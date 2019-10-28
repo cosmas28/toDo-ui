@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { IoMdClose } from 'react-icons/io';
 
 type ContainerProps = {
   displayModal: boolean;
@@ -27,7 +27,7 @@ const Content = styled.div`
   border: 1px solid #888;
   width: 80%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 10px;
+  border-radius: 0.3rem;
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
@@ -52,12 +52,16 @@ const Content = styled.div`
       opacity: 1;
     }
   }
+
+  @media screen and (min-width: 940px) {
+    width: 30%;
+  }
 `;
 
 const Header = styled.div`
-  padding: 2px 16px;
+  display: flex;
+  padding: 1rem 0.8rem;
   text-align: center;
-  border-bottom: 1px solid #dcdcdc;
 `;
 
 const Body = styled.div`
@@ -65,17 +69,28 @@ const Body = styled.div`
 `;
 
 const Footer = styled.div`
-  padding: 2px 16px;
+  padding: 0.9rem 1rem;
   text-align: left;
 `;
 
 const Button = styled.button`
   background: none;
+  width: 14%;
   border: none;
+  cursor: pointer;
 
   &:focus {
     outline: none;
   }
+`;
+
+const Title = styled.h4`
+  order: 0;
+  width: 85%;
+  margin: 0;
+  text-align: left;
+  font-weight: 200;
+  font-size: 1.6rem;
 `;
 
 type ModalProps = {
@@ -86,13 +101,19 @@ type ModalProps = {
   handleCancelButton: () => void;
 };
 
-const Modal: React.FunctionComponent<ModalProps> = ({ header, body, footer, showModal, handleCancelButton }) => (
+const Modal: React.FunctionComponent<ModalProps> = ({
+  header,
+  body,
+  footer,
+  showModal,
+  handleCancelButton,
+}) => (
   <Container displayModal={showModal}>
     <Content>
       <Header>
-        {header}
+        <Title>{header}</Title>
         <Button onClick={handleCancelButton}>
-          <IoIosCloseCircleOutline size={50} color="#3359DB" />
+          <IoMdClose size={30} color="#3359DB" />
         </Button>
       </Header>
       <Body>{body}</Body>

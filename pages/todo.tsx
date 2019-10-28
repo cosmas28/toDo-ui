@@ -5,8 +5,9 @@ import { inject, observer } from 'mobx-react';
 import MainLayout from '../components/MainLayout';
 import Header, { renderAddIcon, renderFilterIcon } from '../components/Header';
 import MenuButton from '../components/MenuButton';
-import Modal from '../components/Modal';
+import ToDoMobileMenuModal from '../components/ToDoMobileMenuModal';
 import ToDoCard from '../components/ToDoCard';
+import AddToDoModal from '../components/AddToDoModal';
 
 import RootStore from '../stores';
 
@@ -33,10 +34,20 @@ const ToDoContainer = styled.div`
   width: 100%;
 `;
 
-export const renderTodoMenu = (display: boolean): JSX.Element => (
+export const renderTodoMenu = (display: boolean, onClickHandler: () => void): JSX.Element => (
   <>
-    <MenuButton isDesktop={display} iconContent={renderAddIcon(30)} buttonLabel="Add" />
-    <MenuButton isDesktop={display} iconContent={renderFilterIcon(30)} buttonLabel="Filter" />
+    <MenuButton
+      onClickHandler={onClickHandler}
+      isDesktop={display}
+      iconContent={renderAddIcon(30)}
+      buttonLabel="Add"
+    />
+    <MenuButton
+      onClickHandler={onClickHandler}
+      isDesktop={display}
+      iconContent={renderFilterIcon(30)}
+      buttonLabel="Filter"
+    />
   </>
 );
 
@@ -53,6 +64,8 @@ export class ToDo extends React.Component<ToDoProps> {
 
   toggleMoreButton = (): void => this.props.store.componentStore.setMoreMenuState();
 
+  toggleAddToDoModal = (): void => this.props.store.componentStore.setAddToDoModal();
+
   render(): JSX.Element {
     return (
       <MainLayout store={this.props.store.componentStore}>
@@ -60,7 +73,7 @@ export class ToDo extends React.Component<ToDoProps> {
           <Header
             title="My To-Do"
             handleMoreButton={this.toggleMoreButton}
-            content={renderTodoMenu(true)}
+            content={renderTodoMenu(true, this.toggleAddToDoModal)}
             hideBackButton={true}
           />
           <ToDoContainer>
@@ -69,11 +82,12 @@ export class ToDo extends React.Component<ToDoProps> {
             ))}
           </ToDoContainer>
         </Container>
-        <Modal
+        <ToDoMobileMenuModal
           showModal={this.props.store.componentStore.showMoreMenu}
           handleCancelButton={this.toggleMoreButton}
-          body={renderTodoMenu(false)}
+          content={renderTodoMenu(false, this.toggleAddToDoModal)}
         />
+        <AddToDoModal store={this.props.store.componentStore} />
       </MainLayout>
     );
   }

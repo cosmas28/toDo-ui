@@ -6,7 +6,8 @@ import Link from 'next/link';
 import AuthPageLayout from '../components/AuthPageLayout';
 import InputBox from '../components/InputBox';
 import { emailIcon } from '../components/Icons';
-import { Form, FormItem, Button } from './index';
+import { Form, FormItem } from './index';
+import FormButton from '../components/FormButton';
 
 const Header = styled.div`
   text-align: center;
@@ -38,13 +39,14 @@ const ForgotPassword: NextPage = () => {
       <Header>
         <Title>Forgot Password</Title>
         <Message>
-          No Problem! Enter your email below and we will send you an email with instruction to reset your password.
+          No Problem! Enter your email below and we will send you an email with instruction to reset
+          your password.
         </Message>
       </Header>
       <Form>
         <InputBox icon={emailIcon()} inputType="email" placeholder="Email" errorMessage="" />
         <FormItem>
-          <Button isForgot>Send Reset Link</Button>
+          <FormButton isFullWidth={true} label="Send Reset Link" isSubmit={true} />
         </FormItem>
         <FormItem isForgot>
           <Link href="/login">

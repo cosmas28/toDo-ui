@@ -7,6 +7,7 @@ class ComponentStore {
   @observable.ref showMoreMenu = false;
   @observable.ref showMobileMenu = false;
   @observable.ref activeMenu = 'To-Do';
+  @observable.ref showAddToDoModal = false;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -22,6 +23,11 @@ class ComponentStore {
 
   @action setActiveMenu = (menuLabel: string): void => {
     this.activeMenu = menuLabel;
+  };
+
+  @action setAddToDoModal = (): void => {
+    this.showAddToDoModal = !this.showAddToDoModal;
+    this.showMoreMenu = false;
   };
 }
 
