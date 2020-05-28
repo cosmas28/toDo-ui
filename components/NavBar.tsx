@@ -4,8 +4,11 @@ import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { TiWeatherPartlySunny } from 'react-icons/ti';
 import { observer } from 'mobx-react';
+import { observable, action } from 'mobx';
 
 import ComponentStore from '../stores/componentStore';
+
+import { Dropdown } from './Common/Dropdown';
 
 const Nav = styled.div`
   background-color: #ffffff;
@@ -32,7 +35,7 @@ const Logo = styled.a`
 
   @media screen and (min-width: 940px) {
     order: 0;
-    flex-basis: 60%;
+    flex-basis: 53%;
   }
 `;
 
@@ -88,9 +91,16 @@ type NavBarProps = {
 
 @observer
 class NavBar extends React.Component<NavBarProps> {
+  @observable isDropdownOpen = false;
   toggleMobileMenu = (): void => this.props.store.setMobileMenuState();
 
   handleLinkClick = (menuLabel: string) => (): void => this.props.store.setActiveMenu(menuLabel);
+
+  // toggleDropdown = (): void => this.props.store.toggleDropdown();
+
+  @action toggleDropdown = (): void => {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  };
 
   render(): JSX.Element {
     const { showMobileMenu, activeMenu } = this.props.store;
@@ -131,8 +141,13 @@ class NavBar extends React.Component<NavBarProps> {
         >
           Routines
         </MenuLink>
+        <Dropdown isOpen={this.isDropdownOpen} onClick={this.toggleDropdown} />
         <MenuIcon onClick={this.toggleMobileMenu}>
-          {!showMobileMenu ? <FaBars size={50} color="#3359DB" /> : <FaTimes size={50} color="#3359DB" />}
+          {!showMobileMenu ? (
+            <FaBars size={50} color="#3359DB" />
+          ) : (
+            <FaTimes size={50} color="#3359DB" />
+          )}
         </MenuIcon>
       </Nav>
     );
